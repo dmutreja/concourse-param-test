@@ -1,0 +1,13 @@
+resources:
+- name: src 
+  type: git
+  source:
+    uri: https://github.com/dmutreja/concourse-param-test
+
+jobs:
+- name: hello
+  public: true
+  plan:
+  - get: src 
+  - task: run
+    file: src/hello-world.yml
