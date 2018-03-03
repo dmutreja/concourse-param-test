@@ -1,13 +1,15 @@
 resources:
-- name: src 
+- name: concourse-param-test
   type: git
   source:
     uri: https://github.com/dmutreja/concourse-param-test
+    branch: master 
+    username: ((github-user))
+    password: ((github-password))
 
 jobs:
-- name: hello
-  public: true
-  plan:
-  - get: src 
-  - task: run
-    file: src/hello-world.yml
+ - name: run-hello-world
+   plan:
+     - {get: src, resource: concourse-param-test}
+     - task: hello-world
+       file: src/hello-world.yml
